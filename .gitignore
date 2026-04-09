@@ -19,8 +19,6 @@
 /storage/*.key
 /storage/pail
 /vendor
-/resources/views/admin/
-/resources/views/components/
 _ide_helper.php
 Homestead.json
 Homestead.yaml
