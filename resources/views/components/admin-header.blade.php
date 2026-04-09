@@ -42,4 +42,20 @@
     </div>
 </header>
 
+<script>
+function toggleDropdown() {
+    const menu = document.getElementById('dropdown-menu');
+    menu.classList.toggle('hidden');
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(event) {
+    const dropdown = document.querySelector('.relative');
+    const menu = document.getElementById('dropdown-menu');
+    if (!dropdown.contains(event.target)) {
+        menu.classList.add('hidden');
+    }
+});
+</script>
+
 
