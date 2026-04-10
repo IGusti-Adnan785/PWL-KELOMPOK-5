@@ -9,3 +9,5 @@
 <body class="min-h-screen bg-slate-100 text-slate-900">
 </body>
 </html>
+<div class="lg:flex lg:min-h-screen">
+</div>
