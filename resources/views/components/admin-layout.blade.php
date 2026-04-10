@@ -11,3 +11,5 @@
 </html>
 <div class="lg:flex lg:min-h-screen">
 </div>
+<aside class="hidden lg:block lg:w-80 lg:sticky lg:top-0 lg:h-screen lg:overflow-y-auto lg:border-r lg:border-slate-200 lg:bg-slate-950 lg:text-slate-100">
+</aside>
