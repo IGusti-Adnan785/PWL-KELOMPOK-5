@@ -20,3 +20,4 @@
         <p class="text-sm text-slate-400">Panel Admin</p>
     </div>
 </div>
+<x-admin-sidebar />
