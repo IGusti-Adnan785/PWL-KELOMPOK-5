@@ -21,3 +21,10 @@
     </div>
 </div>
 <x-admin-sidebar />
+<div class="px-6 pb-6">
+    <p class="text-xs uppercase tracking-[0.3em] text-slate-500">Info</p>
+    <div class="mt-3 rounded-3xl border border-slate-800 bg-slate-900/90 p-4 text-sm text-slate-300">
+        <p class="font-medium text-slate-100">Sistem Inventaris Minimarket</p>
+        <p class="mt-2 text-slate-400">Pantau penjualan dan stok dalam satu tampilan.</p>
+    </div>
+</div>
