@@ -18,6 +18,7 @@
             Penjualan
         </a>
     </div>
+
     <div class="space-y-2">
         <p class="text-xs uppercase tracking-[0.3em] text-slate-500">Manajemen</p>
         <a href="{{ route('admin.customers') }}" class="flex items-center gap-3 rounded-3xl px-4 py-3 text-sm font-medium text-slate-300 transition hover:bg-slate-900/80 hover:text-white {{ request()->routeIs('admin.customers') ? 'bg-emerald-500/10 text-emerald-400' : '' }}">
