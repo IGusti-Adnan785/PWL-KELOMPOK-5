@@ -1,42 +1,89 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\BranchController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\InventoryController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return auth()->check() ? redirect()->route('dashboard') : view('welcome');
 });
 
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-})->name('admin.dashboard');
-
-Route::get('/admin/produk', function () {
-    return view('admin.products');
-})->name('admin.products');
-
-Route::get('/admin/stok', function () {
-    return view('admin.stock');
-})->name('admin.stock');
-
-Route::get('/admin/penjualan', function () {
-    return view('admin.sales');
-})->name('admin.sales');
-
-Route::get('/admin/pelanggan', function () {
-    return view('admin.customers');
-})->name('admin.customers');
-
-Route::get('/admin/laporan', function () {
-    return view('admin.reports');
-})->name('admin.reports');
-
-Route::get('/admin/pengaturan', function () {
-    return view('admin.settings');
-})->name('admin.settings');
-
-// Logout route
+// Authentication Routes
 Route::post('/logout', function () {
-    // For demo purposes, just redirect to welcome page
-    // In real app, you'd handle authentication properly
+    auth()->logout();
+    session()->invalidate();
+    session()->regenerateToken();
     return redirect('/');
-})->name('logout');
+})->name('logout')->middleware('auth');
+
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login')->middleware('guest');
+
+Route::post('/login', function () {
+    $credentials = request()->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+    ]);
+
+    if (auth()->attempt($credentials, request()->filled('remember'))) {
+        request()->session()->regenerate();
+        return redirect()->intended('/dashboard');
+    }
+
+    return back()->withErrors(['email' => 'Invalid credentials'])->onlyInput('email');
+})->middleware('guest');
+
+Route::get('/register', function () {
+    return view('auth.register');
+})->name('register')->middleware('guest');
+
+Route::post('/register', function () {
+    $validated = request()->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|string|min:8|confirmed',
+    ]);
+
+    $user = \App\Models\User::create([
+        'name' => $validated['name'],
+        'email' => $validated['email'],
+        'password' => bcrypt($validated['password']),
+        'role' => 'cashier', // Default role for new registrations
+    ]);
+
+    auth()->login($user);
+    return redirect('/dashboard');
+})->middleware('guest');
+
+Route::middleware(['auth'])->group(function () {
+    // Dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Branch Management (Only Owner)
+    Route::middleware('role:owner')->group(function () {
+        Route::resource('branches', BranchController::class);
+    });
+
+    // Products Management (Owner and Manager)
+    Route::middleware('role:owner,manager')->group(function () {
+        Route::resource('products', ProductController::class);
+    });
+
+    // Inventory Management
+    Route::middleware('branch')->group(function () {
+        Route::resource('inventory', InventoryController::class, ['only' => ['index', 'show']]);
+        Route::post('/inventory/{inventory}/adjust', [InventoryController::class, 'adjust'])->name('inventory.adjust');
+        Route::get('/inventory-logs/{branch}', [InventoryController::class, 'logs'])->name('inventory.logs');
+        Route::get('/inventory-report', [InventoryController::class, 'report'])->name('inventory.report');
+    });
+
+    // Transaction Management
+    Route::middleware('branch')->group(function () {
+        Route::resource('transactions', TransactionController::class, ['only' => ['index', 'create', 'store', 'show']]);
+        Route::get('/transactions-report', [TransactionController::class, 'report'])->name('transactions.report');
+    });
+});
