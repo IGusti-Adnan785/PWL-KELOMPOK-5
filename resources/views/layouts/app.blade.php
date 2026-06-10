@@ -1,16 +1,49 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Market Management - @yield('title')</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<body class="bg-gray-100 text-gray-900">
+    <div class="flex h-screen bg-gray-100">
+        @auth
+            <!-- Sidebar Component -->
+            <x-layout.sidebar />
 
-@section('title', 'Akses Ditolak')
-@section('header', 'Akses Ditolak')
+            <!-- Main Content -->
+            <div class="flex-1 flex flex-col overflow-hidden">
+                <!-- Header Component -->
+                <x-layout.header :title="$__env->yieldContent('header', 'Dashboard')" />
 
-@section('content')
-<div class="text-center">
-    <h1 class="text-6xl font-bold text-red-600 mb-4">403</h1>
-    <p class="text-2xl text-gray-900 mb-2">Akses Ditolak</p>
-    <p class="text-gray-600 mb-8">Anda tidak memiliki izin untuk mengakses halaman ini.</p>
-    <a href="{{ route('dashboard') }}" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg">
-        Kembali ke Dashboard
-    </a>
-</div>
-@endsection
+                <!-- Content Area -->
+                <div class="flex-1 overflow-auto bg-gray-100 p-6">
+                    <!-- Validation Errors -->
+                    @if ($errors->any())
+                        <x-common.alert type="error">
+                            <ul class="list-disc list-inside">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </x-common.alert>
+                    @endif
 
+                    <!-- Success Message -->
+                    @if(session('success'))
+                        <x-common.alert type="success">
+                            {{ session('success') }}
+                        </x-common.alert>
+                    @endif
+
+                    <!-- Page Content -->
+                    @yield('content')
+                </div>
+            </div>
+        @else
+            @yield('content')
+        @endauth
+    </div>
+</body>
+</html>
