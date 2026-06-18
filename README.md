@@ -935,7 +935,7 @@ Dikembangkan sebagai solusi studi kasus mini market untuk mata kuliah PWL (Pemro
 - Mita Atsil - [Contributor]
 
 **Dosen Pembimbing:**
-- [Nama Dosen]
+- [Finsa Nurpandi S.T., M.T.]
 
 ---
 
