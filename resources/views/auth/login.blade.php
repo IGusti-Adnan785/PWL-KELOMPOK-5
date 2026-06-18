@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Mini Market Management</title>
+    <title>Masuk - Sistem Manajemen Mini Market</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen flex items-center justify-center">
@@ -12,7 +12,7 @@
             <!-- Logo Section -->
             <div class="text-center mb-8">
                 <h1 class="text-3xl font-bold text-indigo-600 mb-2">Mini Market</h1>
-                <p class="text-gray-600">Management System</p>
+                <p class="text-gray-600">Sistem Manajemen</p>
             </div>
 
             <!-- Login Form -->
@@ -21,7 +21,7 @@
                 
                 <!-- Email Field -->
                 <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Alamat Email</label>
                     <input 
                         type="email" 
                         name="email" 
@@ -29,7 +29,7 @@
                         value="{{ old('email') }}"
                         required
                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:out-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent @error('email') border-red-500 @enderror"
-                        placeholder="you@example.com"
+                        placeholder="anda@contoh.com"
                     >
                     @error('email')
                         <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
@@ -38,7 +38,7 @@
 
                 <!-- Password Field -->
                 <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Kata Sandi</label>
                     <input 
                         type="password" 
                         name="password" 
@@ -61,7 +61,7 @@
                         class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
                     >
                     <label for="remember" class="ml-2 block text-sm text-gray-700">
-                        Remember me
+                        Ingat saya
                     </label>
                 </div>
 
@@ -70,24 +70,24 @@
                     type="submit" 
                     class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
                 >
-                    Sign In
+                    Masuk
                 </button>
             </form>
 
             <!-- Test Accounts Info -->
             <div class="mt-8 pt-8 border-t border-gray-200">
-                <p class="text-sm text-gray-600 mb-3 font-semibold">Test Accounts:</p>
+                <p class="text-sm text-gray-600 mb-3 font-semibold">Akun Test:</p>
                 <div class="bg-gray-50 p-4 rounded-lg text-xs space-y-2">
                     <div>
-                        <p class="font-semibold text-gray-700">Owner</p>
+                        <p class="font-semibold text-gray-700">Pemilik</p>
                         <p class="text-gray-600">owner@minimarket.local / password</p>
                     </div>
                     <div>
-                        <p class="font-semibold text-gray-700">Manager</p>
+                        <p class="font-semibold text-gray-700">Manajer</p>
                         <p class="text-gray-600">manager@minimarket.local / password</p>
                     </div>
                     <div>
-                        <p class="font-semibold text-gray-700">Cashier</p>
+                        <p class="font-semibold text-gray-700">Kasir</p>
                         <p class="text-gray-600">cashier@minimarket.local / password</p>
                     </div>
                 </div>
@@ -96,7 +96,7 @@
             <!-- Register Link -->
             <div class="text-center mt-6">
                 <p class="text-gray-600 text-sm">
-                    Don't have an account? 
+                    Belum punya akun? 
                     <a href="{{ route('register') }}" class="text-indigo-600 hover:text-indigo-700 font-semibold">
                         Sign up here
                     </a>

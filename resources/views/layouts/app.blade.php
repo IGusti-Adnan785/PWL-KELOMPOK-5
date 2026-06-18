@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini Market Management - @yield('title')</title>
+    <title>Sistem Manajemen Mini Market - @yield('title')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-gray-100 text-gray-900">
@@ -13,7 +13,7 @@
             <div class="w-64 bg-white shadow-lg">
                 <div class="p-4 border-b border-gray-200">
                     <h1 class="text-2xl font-bold text-blue-600">Mini Market</h1>
-                    <p class="text-sm text-gray-600">Management System</p>
+                    <p class="text-sm text-gray-600">Sistem Manajemen</p>
                 </div>
 
                 <nav class="mt-8 space-y-4 px-4">
@@ -22,7 +22,7 @@
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-3m0 0l7-4 7 4M5 9v10a1 1 0 001 1h12a1 1 0 001-1V9m-9 11l4-4m0 0l4-4m-4 4l-4-4m4 4l4 4"></path>
                             </svg>
-                            <span>Dashboard</span>
+                            <span>Dasbor</span>
                         </a>
 
                         <a href="{{ route('branches.index') }}" class="flex items-center space-x-3 px-4 py-2 rounded-lg {{ request()->routeIs('branches.*') ? 'bg-blue-100 text-blue-600' : 'text-gray-700 hover:bg-gray-100' }}">
@@ -57,7 +57,7 @@
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-3m0 0l7-4 7 4M5 9v10a1 1 0 001 1h12a1 1 0 001-1V9m-9 11l4-4m0 0l4-4m-4 4l-4-4m4 4l4 4"></path>
                             </svg>
-                            <span>Dashboard</span>
+                            <span>Dasbor</span>
                         </a>
 
                         @if(auth()->user()->isManager())
@@ -129,7 +129,7 @@
                 <!-- Header -->
                 <div class="bg-white shadow">
                     <div class="max-w-7xl mx-auto py-4 px-6">
-                        <h2 class="text-2xl font-semibold">@yield('header', 'Dashboard')</h2>
+                        <h2 class="text-2xl font-semibold">@yield('header', 'Dasbor')</h2>
                         @if(auth()->user()->branch_id && !auth()->user()->isOwner())
                             <p class="text-sm text-gray-600">{{ auth()->user()->branch->name }} - {{ auth()->user()->branch->city }}</p>
                         @endif
